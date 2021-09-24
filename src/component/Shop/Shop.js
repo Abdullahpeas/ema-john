@@ -6,9 +6,11 @@ import './Shop.css';
 
 const Shop = () => {
 
+    const [count, setCount] = useState(0);
     const [products, setProducts] = useState([])
     const [cart, setCart] = useState([]);
-    const [displayProducts, setDisplayProducts] = useState([])
+    const [displayProducts, setDisplayProducts] = useState([]);
+
     useEffect(() => {
         fetch('./products.JSON')
             .then(res => res.json())
@@ -36,11 +38,13 @@ const Shop = () => {
         }
 
 
-    }, [products])
+    }, [products, count]);
 
     const handleAddToCart = (product) => {
-        const newCart = [...cart, product]
-        setCart(newCart)
+        setCount(count + 1)
+
+        // const newCart = [...cart, product]
+        // setCart(newCart)
         addToDb(product.key)
     }
     const handleSearch = event => {
